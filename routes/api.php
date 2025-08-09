@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\BoardOfTrusteeController;
 use App\Http\Controllers\Api\v1\BulletinController;
 use App\Http\Controllers\Api\v1\OfficerController;
 use Illuminate\Http\Request;
@@ -27,4 +28,5 @@ Route::prefix('v1')->group(function(){
     
     // officers
     Route::get('/get-officers', [OfficerController::class, 'getOfficers']);
+    Route::get('/get-bot', [BoardOfTrusteeController::class, 'getBot']);
 });

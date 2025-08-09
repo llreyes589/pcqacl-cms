@@ -12,4 +12,9 @@ class OfficerYear extends Model
     function officers(){
         return $this->hasMany(Officer::class, 'year_id', 'id');
     }
+    function bot(){
+        return $this->hasMany(BoardOfTrustee::class, 'year_id', 'id');
+    }
+
+
 }
