@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('message'))
+    <div class="alert alert-success" role="alert">
+        {{ session('message') }}
+    </div>
+@endif
 <!-- Table -->
     <div class="card mt-4 shadow-sm">
       <div class="card-header bg-white">
@@ -23,9 +28,9 @@
                 <tr>
                     <td>{{ $loop->index + 1 }}</td>
                     <td>{{ $bulletin->title }}</td>
-                    <td><img src="{{ $bulletin->featured_photo }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></td>
+                    <td><img src="{{ asset('storage/'.$bulletin->featured_photo) }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" width="100" alt=""></td>
                     <td><span class="badge bg-success">{{ $bulletin->created_at }}</span></td>
-                    <td><button type="button" class="btn btn-primary btn-sm">Edit</button></td>
+                    <td><a href="{{ route('bulletins.edit', $bulletin->id) }}" class="btn btn-primary btn-sm">Edit</a></td>
                 </tr>
             @endforeach
           </tbody>

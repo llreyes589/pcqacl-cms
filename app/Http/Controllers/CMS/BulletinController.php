@@ -51,7 +51,7 @@ class BulletinController extends Controller
             'category_id' => $request->category_id,
             'featured_photo' => $path,
         ]);
-        return redirect()->back()->with(['message' => 'Successfully Added']);
+        return redirect(route('bulletins.index'))->with(['message' => 'Successfully Added']);
     }
 
     /**
@@ -73,7 +73,8 @@ class BulletinController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bulletin = Bulletin::find($id);
+        return view('bulletins.create', compact('bulletin'));
     }
 
     /**
@@ -85,7 +86,22 @@ class BulletinController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'featured_photo' => 'image|mimes:jpg,png,jpeg|max:2048'
+        ]);
+        $bulletin = Bulletin::find($id);
+        $path = $bulletin->featured_photo;
+        if($request->has('featured_photo'))
+            $path = $request->file('featured_photo')->store('bulletins/featured_photo');
+        $bulletin->update([
+            'title' => $request->title,
+            'content' => $request['content'],
+            'category_id' => $request->category_id,
+            'featured_photo' => $path,
+        ]);
+        return redirect(route('bulletins.index'))->with(['message' => 'Successfully Updated']);
     }
 
     /**
