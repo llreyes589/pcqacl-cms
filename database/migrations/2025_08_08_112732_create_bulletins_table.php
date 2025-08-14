@@ -17,7 +17,7 @@ class CreateBulletinsTable extends Migration
     {
         Schema::create('bulletins', function (Blueprint $table) {
             $table->id();
-            $table->text('uuid')->default(Str::uuid());
+            $table->text('uuid');
             $table->text('title');
             $table->text('content');
             $table->text('category_id');

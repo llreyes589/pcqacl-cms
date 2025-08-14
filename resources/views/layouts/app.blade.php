@@ -43,10 +43,10 @@
 
     @php
     $menu = [
-        ['label' => 'Overview', 'route' => '/home'],
-        ['label' => 'Bulletins', 'route' => '/bulletins'],
-        ['label' => 'Officers', 'route' => '/officers'],
-        ['label' => 'Board Of Trustees', 'route' => '/bot'],
+        ['label' => 'Overview', 'route' => '/cms/home'],
+        ['label' => 'Bulletins', 'route' => '/cms/bulletins'],
+        ['label' => 'Officers', 'route' => '/cms/officers'],
+        ['label' => 'Board Of Trustees', 'route' => '/cms/bot'],
     ];
     @endphp
   <!-- Navbar -->
@@ -56,7 +56,7 @@
       <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
         ☰
       </button>
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="#">PCQACL CMS</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
