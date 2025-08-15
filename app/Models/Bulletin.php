@@ -9,5 +9,5 @@ class Bulletin extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['uuid' ,'title', 'content', 'category_id', 'featured_photo'];
+    protected $fillable = ['uuid' ,'title', 'content', 'category_id', 'featured_photo', 'is_published'];
 }

@@ -114,4 +114,10 @@ class BulletinController extends Controller
     {
         //
     }
+
+    public function publish($id){
+        $bulletin = Bulletin::find($id);
+        $bulletin->update(['is_published' => $bulletin->is_published === 1 ? 0 : 1]);
+        return redirect(route('bulletins.index'))->with(['message' => 'Successfully published.']);
+    }
 }

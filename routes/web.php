@@ -24,4 +24,5 @@ Auth::routes();
 Route::prefix('cms')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('bulletins', BulletinController::class);
+    Route::put('bulletins/{id}/publish', [BulletinController::class, 'publish'])->name('bulletins.publish');
 });
