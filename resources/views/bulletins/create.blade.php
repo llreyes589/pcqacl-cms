@@ -9,24 +9,27 @@
     @method('PUT')
     @endif
       <fieldset>
-          <div class="form-group mb-2 mb-2">
-            <label for="title">Title</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" aria-describedby="titleId" placeholder="Enter title here" required value="{{ isset($bulletin->id) ? $bulletin->title : old('title') }}">
-            @error('title')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>            
-            @enderror
-          </div>
-          <div class="form-group mb-2">
-            <label for="content">Content</label>
-            <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content" rows="3" placeholder="Enter content here" required >{{ isset($bulletin->id) ? $bulletin->content : old('content') }}</textarea>
-            @error('content')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>            
-            @enderror
-          </div>
+        @include('ui.textfield', 
+          [
+            'label_for' => 'title',
+            'label' => 'Title',
+            'type' => 'text',
+            'name' => 'title',
+            'placeholder' => 'Enter title here',
+            'value' =>  isset($bulletin->id) ? $bulletin->title : old('title')
+          ]
+        )
+
+        @include('ui.textarea', 
+          [
+            'label_for' => 'content',
+            'label' => 'Content',
+            'name' => 'content',
+            'placeholder' => 'Enter content here',
+            'value' => isset($bulletin->id) ? $bulletin->content : old('content')
+          ]
+        )
+          
           <div class="form-group mb-2">
             <label for="category_id">Category</label>
             
@@ -44,19 +47,20 @@
               @endforeach
             </select>
           </div>
-          <div class="form-group mb-5">
-            <label for="featured_photo">Feature Photo</label>
-            <br>
-            <input type="file" class="form-control-file @error('featured_photo') is-invalid @enderror" name="featured_photo" id="featured_photo" placeholder="featured_photo" aria-describedby="featured_photo_id"  value="{{ old('featured_photo') }}">
-            @error('featured_photo')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>            
-            @enderror
 
-            @if(isset($bulletin->id))
-                <img src="{{ asset('storage/'.$bulletin->featured_photo) }}" width="100" class="img-fluid" alt="">
-            @endif
+          @include('ui.file_upload', 
+            [
+              'label_for' => 'featured_photo',
+              'label' => 'Feature Photo',
+              'name'=> 'featured_photo',
+              'value' => old('featured_photo'),
+              'placeholder' => ''
+            ]
+          )
+          @if(isset($bulletin->id))
+              <img src="{{ asset('storage/'.$bulletin->featured_photo) }}" width="100" class="img-fluid" alt="">
+          @endif
+                    
           </div>
           <hr>
           <a href="{{ route('bulletins.index') }}" class="btn btn-danger">Cancel</a>
