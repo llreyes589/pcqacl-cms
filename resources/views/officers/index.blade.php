@@ -13,20 +13,18 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Add new officer</h4>
-                <div class="form-group">
-                  <label for="year_id">Year</label>
-                  <select class="form-control" name="year_id" id="year_id">
-                    @foreach ($years as $y)
+                <form action="{{ route('officers.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @include('ui.select', ['label_for' => 'year_id', 'label' => 'Year', 'name' => 'year_id', 'items' => $years])
                     
-                    <option value="{{ $y->id }}">{{ $y->year }}</option>
-                    @endforeach
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text"
-                    class="form-control" name="name" id="name" aria-describedby="nameId" placeholder="Enter name here">
-                </div>
+                    @include('ui.textfield', ['label_for' => "name", 'label' => "name", 'type' => 'text', 'name' => 'name', 'placeholder' => 'Enter name here', 'value' => old('name')])
+
+                    @include('ui.textfield', ['label_for' => 'position','label' => "position", 'type' => 'text', 'name' => 'position', 'placeholder' => 'Enter position here', 'value' => old('position')])
+                    
+                    @include('ui.file_upload', ['label_for' => 'display_file', 'label' => 'Display File', 'name' => 'display_file', 'placeholder' => 'Select for upload', 'value' => old('display_file')])
+                    <hr>
+                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                </form>
             </div>
         </div>
     </div>

@@ -9,6 +9,8 @@ class Officer extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['year_id', 'name', 'position','display_photo'];
+
     function year(){
         return $this->belongsTo(OfficerYear::class, 'year_id', 'id');
     }
