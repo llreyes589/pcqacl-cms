@@ -69,7 +69,11 @@ class OfficerController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $years = OfficerYear::select(['id', 'year as label'])->get();
+        $officers = Officer::all();
+        $officer = Officer::find($id);
+        return view('officers.index', compact("officer", 'years', 'officers'));
     }
 
     /**
@@ -81,7 +85,18 @@ class OfficerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'position' => 'required',
+            'display_file' => 'image|mimes:jpg,png,jpeg|max:2048'
+        ]);
+        $officer = Officer::find($id);
+        $path = $officer->display_photo;
+        if($request->has('display_file'))
+            $path = $request->file('display_file')->store('officers/display_photo');
+        $request->merge(['display_photo' => $path]);
+        $officer->update($request->except(['_token', 'display_file', '_method']));
+        return redirect(route('officers.index'))->with(['message' => 'Successfully Updated']);
     }
 
     /**

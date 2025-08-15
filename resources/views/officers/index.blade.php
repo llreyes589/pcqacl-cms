@@ -12,18 +12,38 @@
     <div class="col-md-4 col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Add new officer</h4>
-                <form action="{{ route('officers.store') }}" method="post" enctype="multipart/form-data">
+                <h4 class="card-title">
+                    @if(isset($officer->id))
+                    Update
+                    @else
+                    Add new 
+                    @endif
+                    officer</h4>
+                <form action="{{ isset($officer->id) ? route('officers.update', $officer->id) : route('officers.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @if(isset($officer->id))
+                    @method('PUT')
+                    @endif
                     @include('ui.select', ['label_for' => 'year_id', 'label' => 'Year', 'name' => 'year_id', 'items' => $years])
                     
-                    @include('ui.textfield', ['label_for' => "name", 'label' => "name", 'type' => 'text', 'name' => 'name', 'placeholder' => 'Enter name here', 'value' => old('name')])
+                    @include('ui.textfield', ['label_for' => "name", 'label' => "name", 'type' => 'text', 'name' => 'name', 'placeholder' => 'Enter name here', 'value' => isset($officer->id) ? $officer->name : old('name')])
 
-                    @include('ui.textfield', ['label_for' => 'position','label' => "position", 'type' => 'text', 'name' => 'position', 'placeholder' => 'Enter position here', 'value' => old('position')])
+                    @include('ui.textfield', ['label_for' => 'position','label' => "position", 'type' => 'text', 'name' => 'position', 'placeholder' => 'Enter position here', 'value' => isset($officer->id) ? $officer->position :  old('position')])
                     
-                    @include('ui.file_upload', ['label_for' => 'display_file', 'label' => 'Display File', 'name' => 'display_file', 'placeholder' => 'Select for upload', 'value' => old('display_file')])
+                    @include('ui.file_upload', ['label_for' => 'display_file', 'label' => 'Display File', 'name' => 'display_file', 'placeholder' => 'Select for upload', 'value' => isset($officer->id) ? $officer->display_file :  old('display_file')])
                     <hr>
-                    <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                    @if(isset($officer->id))
+                    <a href="{{ route('officers.index') }}" class="btn btn-danger btn-sm">
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-info btn-sm">
+                        Update
+                    </button>
+                    @else
+                    <button type="submit" class="btn btn-success btn-sm">
+                        Save
+                    </button>
+                    @endif
                 </form>
             </div>
         </div>
@@ -50,7 +70,7 @@
                     <td>{{ $officer->year->year }}</td>
                     <td>{{ $officer->created_at }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                        <a href="{{ route('officers.edit', $officer->id) }}" class="btn btn-primary btn-sm">Edit</a>
                     </td>
                 </tr>
                 @endforeach
