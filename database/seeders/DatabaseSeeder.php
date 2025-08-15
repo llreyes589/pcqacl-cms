@@ -13,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            AdminSeeder::class,
+            OfficerYearSeeder::class,
+            BulletinSeeder::class,
+            OfficersSeeder::class,
+            BoardOfTrusteesSeeder::class
+        
+        ]);
         // User::factory(10)->create();
     }
 }

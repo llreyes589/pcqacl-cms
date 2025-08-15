@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CMS\BulletinController;
+use App\Http\Controllers\CMS\OfficerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,12 @@ Auth::routes();
 
 Route::prefix('cms')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // bulletin
     Route::resource('bulletins', BulletinController::class);
     Route::put('bulletins/{id}/publish', [BulletinController::class, 'publish'])->name('bulletins.publish');
+    
+    // officers
+    Route::resource('officers', OfficerController::class);
+
 });

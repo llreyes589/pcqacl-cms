@@ -18,6 +18,7 @@ class CreateBoardOfTrusteesTable extends Migration
             $table->integer('year_id');
             $table->text('name');
             $table->integer('order');
+            $table->text('display_photo');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class CreateOfficersTable extends Migration
             $table->integer('year_id');
             $table->text('name');
             $table->text('position');
+            $table->text('display_photo');
             $table->timestamps();
         });
     }

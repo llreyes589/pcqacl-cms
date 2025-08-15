@@ -13,7 +13,7 @@
         <a href="{{ route('bulletins.create') }}" class="btn btn-primary btn-sm">Create new</a>
       </div>
       <div class="card-body table-responsive">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" id="bulletins-table">
           <thead>
             <tr>
               <th>#</th>
@@ -52,4 +52,12 @@
         </table>
       </div>
     </div>
+@endsection
+
+@section('javascript')
+<script>
+    $(function(){
+        $('#bulletins-table').dataTable();
+    })
+</script>
 @endsection
