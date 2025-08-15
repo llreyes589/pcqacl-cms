@@ -23,7 +23,7 @@
       display: block;
       padding: 0.6rem 1rem;
     }
-    .sidebar a:hover {
+    .sidebar a:hover, .active {
       background-color: #495057;
       color: #fff;
     }

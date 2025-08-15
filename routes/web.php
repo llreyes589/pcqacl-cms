@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CMS\BoardOfTrusteeController;
 use App\Http\Controllers\CMS\BulletinController;
 use App\Http\Controllers\CMS\OfficerController;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,8 @@ Route::prefix('cms')->group(function(){
     
     // officers
     Route::resource('officers', OfficerController::class);
+
+    // bot
+    Route::resource('bot', BoardOfTrusteeController::class);
 
 });
